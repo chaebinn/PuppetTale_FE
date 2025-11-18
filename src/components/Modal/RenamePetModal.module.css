@@ -1,0 +1,17 @@
+/* 확인 버튼 */
+.confirmBtn{width: 287px;height: 52px; padding: 20px 18px;display:flex; justify-content: center;
+align-items: center;border-radius: 100px; background: var(--button-disabled-border, #CDD1D5);
+box-shadow: 1px -1px 2px 0 rgba(0, 0, 0, 0.15) inset, 0 1px 2px 0 rgba(255, 255, 255, 0.79) inset;}
+.confirmText {color: var(--text-white, #FAFAFA);text-align: center;font-family: var(--font-family-Font-2, Arial);
+ font-size: var(--font-size-17, 17px);font-style: normal;font-weight: var(--font-weight-700, 700);line-height: normal;}
+.isActive{ background: var(--primary-gradient, linear-gradient(209deg, var(--Secondary-50, #5D44FF) 19.8%, var(--primary-60, #0192F5) 102.39%));
+box-shadow: 1px -1px 2px 0 rgba(0, 0, 0, 0.15) inset, 0 1px 2px 0 rgba(255, 255, 255, 0.79) inset;}
+
+.contentBox{width: 287px; display: flex; flex-direction: column; gap:10px; align-items: center; justify-content: center;}
+.profileImg{width: 80px; height: 80px;}
+.input{width: 100%; padding: 12px 20px; display: flex; justify-content: center; align-items: center;
+border-radius: 15px; border: 1px solid var(--element-light-gray, #E6E8EA);font-family: 'Pretendard'; font-size: 15px; }
+.input::placeholder {
+color: var(--text-gray, #6D7882);text-align: center;font-family: 'Pretendard';
+font-size: 15px;font-style: normal;font-weight: 500;line-height: 130%; letter-spacing: -1px;}
+
