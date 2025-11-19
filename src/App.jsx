@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import React, { useState } from "react";
 import Home from "./pages/Home/Home";
+import Chat from "./pages/Chat/Chat";
 import "./App.css";
 import './index.css'; 
 import MyPage from "./pages/Home/MyPage";
@@ -14,6 +15,7 @@ function App() {
   return (
   <Routes>
       <Route path="/" element={<Home />} />     
+      <Route path="/chat" element={<Chat />} />
       <Route path="/mypage" element={<MyPage/>}/>
       <Route path="/fairytales" element={<FairytalesPage/>}/>
   </Routes>  );

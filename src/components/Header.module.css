@@ -1,0 +1,20 @@
+.header {
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  height: 45px;
+  width: 100%;
+  padding: 15px 20px;
+  justify-content: space-between;
+  background: transparent; /* 기본은 투명 */
+  z-index: 9999; /* 제일 위로 올라오게 */
+}
+.iconButton {
+  border: none;
+  background: none;
+  width: 37px;
+  height: 37px;
+  padding: 0;
+  cursor: pointer;
+}
