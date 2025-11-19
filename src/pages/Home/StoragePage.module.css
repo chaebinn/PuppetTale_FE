@@ -3,16 +3,17 @@
 .appWrapper{background-image: url('../../assets/backGround.png'); background-repeat: no-repeat;  background-position: center center;}
 
 
-.fairySection{width: 100%;display: flex; flex-direction: column; justify-content: flex-start; align-items: center; gap:22.25px;}
+.fairySection{width: 100%;display: flex; flex-direction: column; justify-content: flex-start; align-items: center; gap:22.25px; margin-top: 14.95px;;}
 .framesRowWrapper{position: relative; width: 100%;}
 .framesRow{width: 100%; display: flex; justify-content: center; align-items: flex-start; gap:21px; position: relative; z-index: 80;}
 /* 개별 프레임(이미지+수정버튼) */
 .frameWrapper{display:flex; flex-direction: column; align-items: center; justify-content: center; gap:23.25px;}
 .fairyFrame{width: 88px; height: 127px; border-radius: 0 10px 10px 0;
 background: #FFF; box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10); position: relative;}
-.thumbnail{width:100%; background-size: cover; background-position: center;}
+.thumbnail{width:100%; height: 100%; background-size: cover; background-position: center;}
 .frameButton{position: absolute; top:10px; right:8px; z-index: 99; padding:0px;}
-.fairyTitle{color: #72777B;text-align: center; font-family: 'Pretendard'; font-size: 13px;
+.fairyTitle{color: var(--text-blue90, #00497B);
+text-align: center; font-family: 'Pretendard'; font-size: 13px;
 font-style: normal;font-weight: 700;line-height: 130%; letter-spacing: -1px; padding: 10px 0px;}
 .shelfBase{z-index: 60; position: absolute; top:116px; left: 50%; transform: translateX(-50%); } 
 

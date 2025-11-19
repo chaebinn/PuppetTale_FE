@@ -43,7 +43,7 @@ function SideMenu({ isOpen, onClose }) {
 
           <button
             className={styles.menuItem}
-            onClick={() => handleNavigate("/fairytales")}
+            onClick={() => handleNavigate("/storage")}
           >
             <span className={styles.bookIcon}></span>
             <span>동화관리</span>

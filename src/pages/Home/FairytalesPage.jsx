@@ -4,6 +4,8 @@ import styles from "./FairytalesPage.module.css";
 import profileImg from "../../assets/puppet.svg";
 import CtaButton from "../../components/CtaButton";
 import fairytales from "../../assets/fairytales.png";
+import Header from "../../components/Header";
+import SideMenu from "../../components/SideMenu";
 
 export default function FairytalesPage(){
 
@@ -11,6 +13,7 @@ export default function FairytalesPage(){
     const [activeDot, setActiveDot] = useState(0);
 
     const navigator = useNavigate();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     //랜더링 시에 바로 동화 만들기위한 axios문 포함하기
     const makeFairytales = async ()=> {
@@ -46,7 +49,8 @@ export default function FairytalesPage(){
   return (
     <div className="app-wrapper">
       {/* 헤더 */}
-      <div>일단 헤더</div>
+      <Header isTransparent={true} onMenuClick={() => setIsMenuOpen(true)} />
+      <SideMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
       <div>
         {loading ? (
         <div className={styles.loadingPageWrapper}>

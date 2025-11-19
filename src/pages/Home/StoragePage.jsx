@@ -12,6 +12,8 @@ import shelfBase from "../../assets/shelfBase.svg";
 
 //컴포넌트
 import DeleteStoryModal from "../../components/Modal/DeleteStoryModal";
+import Header from "../../components/Header";
+import SideMenu from "../../components/SideMenu";
 //더미데이터(임의)
 import { fairyDummy } from "../../data/fairyDummy";
 
@@ -31,7 +33,7 @@ export default function StoragePage(){
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [selectedFairy, setSelectedFairy] = useState(null); // 어떤 동화인지 저장
-
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     //옵션 모달이 뜨는 위치
     const [optionPos,setOptionPos] = useState({top: 0, left:0});
 
@@ -130,8 +132,11 @@ export default function StoragePage(){
 
     return(
         <div className={`${styles.appWrapper} app-wrapper`}>
-        {/* 헤더 */}
-        <div>일단 헤더</div>
+         {/* 헤더 컴포넌트 */}
+         <Header isTransparent={true} onMenuClick={() => setIsMenuOpen(true)} />
+
+        {/* 사이드 메뉴바 */}
+        <SideMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
 
         {/* 동화 리스트 (+선반) */}
         <div>

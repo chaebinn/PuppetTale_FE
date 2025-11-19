@@ -12,6 +12,8 @@ import MyPageOption from "../../components/MyPageOption";
 import ModeSelectModal from "../../components/Modal/ModeSelectModal";
 import RenamePetModal from "../../components/Modal/RenamePetModal";
 import CreateStoryModal from "../../components/Modal/CreateStoryModal";
+import Header from "../../components/Header";
+import SideMenu from "../../components/SideMenu";
 
 export default function MyPage(){
 
@@ -19,11 +21,15 @@ export default function MyPage(){
     const editProfileImg = () => {console.log('프로필 이미지 수정 버튼 잘 작동')};
     //모달 종류 : 'mode' | 'rename' | 'congrats' | 'delete' 
     const [modal, setModal] = useState(""); 
+    const [isMenuOpen, setIsMenuOpen] = useState(false); 
 
     return(
         <div className="app-wrapper">
         {/* 헤더 */}
-        <div>일단 헤더</div>
+        <Header isTransparent={true} onMenuClick={() => setIsMenuOpen(true)} />
+
+        {/* 사이드 메뉴바 */}
+        <SideMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
 
         <div className={styles.myPageWrapper}>
 
