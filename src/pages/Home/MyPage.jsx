@@ -6,20 +6,19 @@ import React, { useState } from 'react';
 import styles from "./MyPage.module.css";
 import profileImg from "../../assets/puppet.svg";
 import profileEdit from "../../assets/profileEdit.svg";
-import CtanButton from "../../components/CtaButton";
+import CtaButton from "../../components/CtaButton";
 //컴포넌트
 import MyPageOption from "../../components/MyPageOption";
 import ModeSelectModal from "../../components/Modal/ModeSelectModal";
 import RenamePetModal from "../../components/Modal/RenamePetModal";
 import CreateStoryModal from "../../components/Modal/CreateStoryModal";
-import BaseModal from "../../components/Modal/BaseModal";
 
 export default function MyPage(){
 
     // 프로필 사진 변경 함수
     const editProfileImg = () => {console.log('프로필 이미지 수정 버튼 잘 작동')};
     //모달 종류 : 'mode' | 'rename' | 'congrats' | 'delete' 
-    const [modal, setModal] = useState("mode"); 
+    const [modal, setModal] = useState(""); 
 
     return(
         <div className="app-wrapper">
@@ -54,7 +53,7 @@ export default function MyPage(){
 
         {/* 버튼 박스 */}
         <div className={styles.buttonBox}>
-            <CtanButton title="퇴원하기" onClick={() => setModal("congrats")}/>
+            <CtaButton title="퇴원하기" onClick={() => setModal("congrats")}/>
         </div>
 
         </div>
