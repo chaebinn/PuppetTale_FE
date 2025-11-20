@@ -72,6 +72,7 @@
   padding: 17px 53px;
   display: flex;
   align-items: center;
+  justify-content: center;
   border: 1px solid #e5f4ff;
   background: #fff;
   cursor: pointer;
