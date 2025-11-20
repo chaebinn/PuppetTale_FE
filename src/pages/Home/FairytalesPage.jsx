@@ -22,18 +22,22 @@ export default function FairytalesPage(){
             //동화 만들기, 동화 불러오기
 
             //동화 만들기, 동화 불러오기 성공하면 
-            setLoading(false);
         }
         catch(e){
             console.error("동화 생성을 실패했습니다.", e);
-
-            setLoading(false);
-        }
+        } finally {setLoading(false);}
    }
 
     useEffect (()=>{
-        setLoading(true);
-        makeFairytales();
+      //api 연결 시, makeFairytales() 함수 호출 활성화 예정 
+      //makeFairytales();
+      //일단은 시현용 코드 (3초 로딩 true 후, 로딩 false 로직) <-  api 연결 후 삭제 예정!!
+      setLoading(true);
+
+      const timer = setTimeout(()=>{
+        setLoading(false);
+      },3000);
+
     },[]);
 
   useEffect(() => {
@@ -47,31 +51,35 @@ export default function FairytalesPage(){
   }, [loading]);
 
   return (
-    <div className="app-wrapper">
-      {/* 헤더 */}
-      <Header isTransparent={true} onMenuClick={() => setIsMenuOpen(true)} />
-      <SideMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
-      <div>
+    <>
         {loading ? (
-        <div className={styles.loadingPageWrapper}>
-          <div className={styles.loadingBox}>
-            <img src={profileImg} className={styles.profileImg} alt="프로필 이미지" />
-            <div className={styles.loadingDots}>
-              {[0, 1, 2].map((idx) => (
-                <span
-                  key={idx}
-                  className={`${styles.dot} ${activeDot === idx ? styles.activeDot : ""}`}
-                />
-              ))}
+          <div className={`app-wrapper ${styles.appWrapper}`}>
+          {/* 헤더 */}
+          <Header isTransparent={true} onMenuClick={() => setIsMenuOpen(true)} />
+          <SideMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+        
+            <div className={styles.loadingBox}>
+              <img src={profileImg} className={styles.profileImg} alt="프로필 이미지" />
+              <div className={styles.loadingDots}>
+                {[0, 1, 2].map((idx) => (
+                  <span
+                    key={idx}
+                    className={`${styles.dot} ${activeDot === idx ? styles.activeDot : ""}`}
+                  />
+                ))}
+              </div>
+              <h1>잠깐만 기다려줘!</h1>
+              <p>그동안의 대화를 바탕으로<br/>동화를 생성중이야. 조금만 기다려줘!</p>
             </div>
-            <h1>잠깐만 기다려줘!</h1>
-            <p>그동안의 대화를 바탕으로<br/>동화를 생성중이야. 조금만 기다려줘!</p>
-          </div>
+
           </div>
         ) : (
-          // loading이 false일 때 보여줄 콘텐츠 작성
-          <div className={styles.completePageWrapper}>
+          <div className={`app-wrapper ${styles.appWrapper}`}>
+          {/* 헤더 */}
+          <Header isTransparent={true} onMenuClick={() => setIsMenuOpen(true)} />
+          <SideMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
             {/* 일단 동화 이미지(임의) */}
+            <div className={styles.completePageWrapper}>
             <img src={fairytales} className={styles.fairytalesImg}/>
             {/* 동화 내용도 임의 */}
             <p className={styles.fairytalesContent}>
@@ -81,9 +89,9 @@ export default function FairytalesPage(){
             <div className={styles.buttonBox}>
                 <CtaButton title="저장하기" onClick={() => navigator('/storage')}/>
             </div>
+            </div>
           </div>
         )}
-      </div>
-    </div>
+    </>
   );
 }

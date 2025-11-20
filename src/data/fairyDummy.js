@@ -9,7 +9,7 @@ export const fairyDummy ={
     fairyTales : [
     {
       id: 1,
-      title: "반짝이는 숲속 모험",
+      title: "2025.11.17",
       thumbnailUrl: fairyImg01,
       createdAt: "2025-11-17T08:00:00"
     },
