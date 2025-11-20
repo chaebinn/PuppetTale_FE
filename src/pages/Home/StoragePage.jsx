@@ -56,7 +56,16 @@ export default function StoragePage(){
 
     useEffect(()=>{
         // getFairy(); api 연결 시 해당 코드로 변경 예정
-        setData(fairyDummy.fairyTales); //일단 더미데이터 가져오기
+
+        //아래는 시현용 코드 (추후 지움)
+        //로컬 스토리지에 저장된 동화 가져오기
+        const saved = localStorage.getItem("fairtTales");
+        if (saved) {
+            setData(JSON.parse(saved));
+            return;
+        }
+        //없으면 더미 데이터
+        setData(fairyDummy.fairyTales);
     },[]);
     
     const fairyArr = chunk(data, 3);
@@ -92,40 +101,55 @@ export default function StoragePage(){
     //동화 제목 수정, PATCH요청
     const handleSubmitRename = async (newTitle) => {
         if (!selectedFairy) return;
-        try{ 
-            //API 요청
-            await axios.patch(
-                `/api/children/${childId}/fairytales/${selectedFairy.id}`,
-                {title: newTitle}
-            );
-            //프론트 상태 갱신
-            setData((prev)=>
-            prev.map((f)=>
-            f.id === selectedFairy.id? {...f, title:newTitle}: f));
+        
+        // try-catch-finally API 연결 시 살리기 (일단 주석)
+        // try{ 
+        //     //API 요청
+        //     await axios.patch(
+        //         `/api/children/${childId}/fairytales/${selectedFairy.id}`,
+        //         {title: newTitle}
+        //     );
+        //     //프론트 상태 갱신
+        //     setData((prev)=>
+        //     prev.map((f)=>
+        //     f.id === selectedFairy.id? {...f, title:newTitle}: f));
 
-            setModal(null);
-        }catch(error){
-            console.error("제목 수정 실패",error);
-            //일단 모달 닫기
-            setModal(null);
-        }
+        // }catch(error){
+        //     console.error("제목 수정 실패",error);
+        //     //일단 모달 닫기
+        // }finally{setModal(null);}
+
+
+        //이 아래는 시연 영상 용 (더미데이터, 로컬 스토리지 활용) : 추후 API 연결 시 삭제 예정
+        const updated = data.map((f)=>
+        f.id === selectedFairy.id? {...f, title:newTitle}:f);
+        setData(updated);
+
+        localStorage.setItem("fairyTales", JSON.stringify(updated));
+
+        setModal(null);
     };
 
     //동화 삭제 요청, 상태 업데이트
     const handleSubmitDelete = async () => {
         if (!selectedFairy) return;
-        try{
-            await axios.delete(
-            `/api/children/${childId}/fairytales/${selectedFairy.id}`
-            );
+        // try{
+        //     await axios.delete(
+        //     `/api/children/${childId}/fairytales/${selectedFairy.id}`
+        //     );
 
-            setData((prev)=> prev.filter((f)=>f.id!==selectedFairy.id));
-            setModal(null);
-        }catch(error){
-            console.error("동화 삭제 실패",error);
-            //일단 모달 닫기
-            setModal(null);
-        }
+        //     setData((prev)=> prev.filter((f)=>f.id!==selectedFairy.id));
+        // }catch(error){
+        //     console.error("동화 삭제 실패",error);
+        //     //일단 모달 닫기
+        // }finally{setModal(null);}
+
+        //이 아래는 시연 영상 용: 추후 API 연결 시 삭제 예정
+        const updated = data.filter((f)=> f.id!==selectedFairy.id);
+        setData(updated);
+
+        localStorage.setItem("fairyTales", JSON.stringify(updated));
+        setModal(null);
     };
 
 
