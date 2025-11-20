@@ -14,7 +14,7 @@ function Header({ isTransparent = true, onMenuClick }) {
   const userIcon = isTransparent ? user2 : user1;
 
   return (
-    <header className={styles.header}>
+    <div className={styles.header}>
       {/* 둘 다 투명 */}
       {/* 왼쪽 메뉴 버튼 : 사이드 메뉴 열기*/}
       <button className={styles.iconButton} onClick={onMenuClick}>
@@ -25,7 +25,7 @@ function Header({ isTransparent = true, onMenuClick }) {
       <button className={styles.iconButton} onClick={() => navigate("/mypage")}>
         <img src={userIcon} alt="user" />
       </button>
-    </header>
+    </div>
   );
 }
 
