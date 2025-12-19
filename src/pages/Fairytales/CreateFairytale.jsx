@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { createFairytale } from "../../api/fairytale.api";
+import { getMyPage } from "../../api/mypage.api";
 
 import styles from "./CreateFairytale.module.css";
 import profileImg from "../../assets/puppet.svg";
@@ -22,23 +23,46 @@ export default function CreateFairytale(){
 
     const navigator = useNavigate();
 
-//랜더링 시에 바로 동화 생성하기.
+//랜더링 시에 바로 (마이페이지 조회 후 ->)동화 생성하기
 useEffect(() => {
   const makeFairytales = async () => {
     try {
       setLoading(true);
-      const res = await createFairytale();
+
+      // 1 마이페이지 조회
+      const myRes = await getMyPage();
+      const my = myRes.data;
+
+      const userAge =
+        Number(String(my?.age ?? "").replace(/[^0-9]/g, "")) || 0;
+
+      // 3) create 요청 바디 구성 (mypage 응답값 활용)
+      const payload = {
+        sessionId: "server_user_001",
+        childId: 3,
+        userName: my?.name ?? "아기사자",
+        userAge, 
+        puppetName: my?.puppetName ?? "토리",
+      };
+
+      // 4) 동화 생성
+      const res = await createFairytale(payload);
       const data = res?.data ?? res;
 
+      // pages 정렬
       const sortedPages = Array.isArray(data?.pages)
-        ? [...data.pages].sort((a, b) => (a?.pageNumber ?? 0) - (b?.pageNumber ?? 0))
+        ? [...data.pages].sort(
+            (a, b) => (a?.pageNumber ?? 0) - (b?.pageNumber ?? 0)
+          )
         : [];
 
       setPages(sortedPages);
       setCurrentIndex(0);
 
-      if (data?.id) sessionStorage.setItem("latestFairyTaleId", data.id);
-      if (data?.fairyTaleId) sessionStorage.setItem("latestFairyTaleId", data.fairyTaleId);
+      // 생성된 동화 id 저장(선택)
+      if (data?.fairyTaleId) {
+        sessionStorage.setItem("latestFairyTaleId", data.fairyTaleId);
+      }
     } catch (err) {
       console.error(err);
       setError("동화 생성 중 문제가 발생했어요.");
@@ -47,8 +71,9 @@ useEffect(() => {
     }
   };
 
-  makeFairytales();
-}, []);
+    makeFairytales();
+  }, []);
+
 
 
 //로딩중
