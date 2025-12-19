@@ -14,8 +14,9 @@ function App() {
       <Route path="/" element={<Chat />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/mypage" element={<MyPage />} />
-      <Route path="/fairytales" element={<FairytalesPage />} />
+      <Route path="/fairytales" element={<CreateFairytale />} />
       <Route path="/storage" element={<StoragePage />} />
+      <Route path="/fairytale/:id" element={<FairytaleDetail />} />
     </Routes>
   );
 }
