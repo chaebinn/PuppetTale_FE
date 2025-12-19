@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import React, { useState } from "react";
-import Home from "./pages/Home/Home.jsx";
 import Chat from "./pages/Chat/Chat.jsx";
 import "./App.css";
 import "./index.css";
