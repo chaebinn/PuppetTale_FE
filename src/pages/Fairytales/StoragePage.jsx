@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from "axios"; 
-
+import { useNavigate } from 'react-router-dom';
 
 //스타일과 img 
 import styles from "./StoragePage.module.css";
@@ -14,6 +13,10 @@ import shelfBase from "../../assets/shelfBase.svg";
 import DeleteStoryModal from "../../components/Modal/DeleteStoryModal";
 import Header from "../../components/Header";
 import SideMenu from "../../components/SideMenu";
+import FairytaleDetail from './FairytaleDetail';
+
+//api
+import { getFairytaleList,updateFairytaleTitle, deleteFairytale} from '../../api/fairytale.api';
 //더미데이터(임의)
 import { fairyDummy } from "../../data/fairyDummy";
 
@@ -29,6 +32,8 @@ const chunk = (arr, size) => {
 // 동화 보관함 페이지
 export default function StoragePage(){
 
+    const navigate =useNavigate();
+
     const [modal, setModal]= useState(null); //모달 상태 설정 ( 'option' || 'rename' || 'delete')
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
@@ -37,14 +42,12 @@ export default function StoragePage(){
     //옵션 모달이 뜨는 위치
     const [optionPos,setOptionPos] = useState({top: 0, left:0});
 
-    const childId = 1; // TODO: 실제 childId는 라우트 params 등에서 가져오기
-
     // 렌더링 되지마자 실행할 함수/ get으로 동화 목록 가져오기 (일단 더미 데이터로 대체)
     const getFairy = async ()=> {
         //데이터 get
         try{ 
             setLoading(true);
-            const res = await axios.get(`/api/children/${childId}/fairytales`);
+            const res = await getFairytaleList();
             setData(res.data.fairyTales);
             console.log("동화 목록 가져오기 성공", res.data);
         }catch(error){
@@ -55,17 +58,7 @@ export default function StoragePage(){
     }; 
 
     useEffect(()=>{
-        // getFairy(); api 연결 시 해당 코드로 변경 예정
-
-        //아래는 시현용 코드 (추후 지움)
-        //로컬 스토리지에 저장된 동화 가져오기
-        const saved = localStorage.getItem("fairtTales");
-        if (saved) {
-            setData(JSON.parse(saved));
-            return;
-        }
-        //없으면 더미 데이터
-        setData(fairyDummy.fairyTales);
+        getFairy();
     },[]);
     
     const fairyArr = chunk(data, 3);
@@ -101,55 +94,29 @@ export default function StoragePage(){
     //동화 제목 수정, PATCH요청
     const handleSubmitRename = async (newTitle) => {
         if (!selectedFairy) return;
-        
-        // try-catch-finally API 연결 시 살리기 (일단 주석)
-        // try{ 
-        //     //API 요청
-        //     await axios.patch(
-        //         `/api/children/${childId}/fairytales/${selectedFairy.id}`,
-        //         {title: newTitle}
-        //     );
-        //     //프론트 상태 갱신
-        //     setData((prev)=>
-        //     prev.map((f)=>
-        //     f.id === selectedFairy.id? {...f, title:newTitle}: f));
 
-        // }catch(error){
-        //     console.error("제목 수정 실패",error);
-        //     //일단 모달 닫기
-        // }finally{setModal(null);}
-
-
-        //이 아래는 시연 영상 용 (더미데이터, 로컬 스토리지 활용) : 추후 API 연결 시 삭제 예정
-        const updated = data.map((f)=>
-        f.id === selectedFairy.id? {...f, title:newTitle}:f);
-        setData(updated);
-
-        localStorage.setItem("fairyTales", JSON.stringify(updated));
-
-        setModal(null);
+        try{
+            await updateFairytaleTitle(selectedFairy.id, newTitle);
+            setData((prev)=>
+            prev.map((f)=>
+            f.id === selectedFairy.id?{...f, title:newTitle}:f));
+        } catch(error){
+            console.error("제목 수정 실패",error);
+        } finally{setModal(null);}
     };
 
     //동화 삭제 요청, 상태 업데이트
     const handleSubmitDelete = async () => {
         if (!selectedFairy) return;
-        // try{
-        //     await axios.delete(
-        //     `/api/children/${childId}/fairytales/${selectedFairy.id}`
-        //     );
 
-        //     setData((prev)=> prev.filter((f)=>f.id!==selectedFairy.id));
-        // }catch(error){
-        //     console.error("동화 삭제 실패",error);
-        //     //일단 모달 닫기
-        // }finally{setModal(null);}
-
-        //이 아래는 시연 영상 용: 추후 API 연결 시 삭제 예정
-        const updated = data.filter((f)=> f.id!==selectedFairy.id);
-        setData(updated);
-
-        localStorage.setItem("fairyTales", JSON.stringify(updated));
-        setModal(null);
+        try {
+            await deleteFairytale(selectedFairy.id);
+            setData((prev) => prev.filter((f) => f.id !== selectedFairy.id));
+        } catch (e) {
+            console.error("동화 삭제 실패", e);
+        } finally {
+            setModal(null);
+        }
     };
 
 
@@ -181,7 +148,8 @@ export default function StoragePage(){
                                 </button>
                                 {/* 프레임 배경(동화 이미지) */}
                                 <div className={styles.thumbnail}
-                                style={{backgroundImage:`url(${tale.thumbnailUrl})`}}/>
+                                style={{backgroundImage:`url(${tale.thumbnailUrl})`}}
+                                onClick={() => navigate(`/fairytale/${tale.id}`)}/>
                             </div>
                             {/* 제목 */}
                             <p className={styles.fairyTitle}>{tale.title}</p>
