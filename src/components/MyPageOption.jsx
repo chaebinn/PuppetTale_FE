@@ -6,35 +6,41 @@ import styles from "./MyPageOption.module.css";
 import chevron from "../assets/chevron.svg";
 import { usePuppet } from "../context/PuppetContext";
 
-
-export default function MyPageOption({ type, onClick }) {
+// 모드 id -> 라벨 매핑 (백엔드 enum 기준)
+const MODE_LABEL = {
+  MATURE: "성숙한",
+  AFFECTIONATE: "다정한",
+  ENERGETIC: "활기찬",
+  REASSURING: "든든한",
+};
+ 
+export default function MyPageOption({ type, value, onClick }) {
   const [src, setSrc] = useState(profileImg); // 기본값
-  const [h1,setH1] = useState("내 정보 수정");
-  const [p,setP] =useState("이름, 나이, 프로필 변경");
+  const [h1, setH1] = useState("내 정보 수정");
+  const [p, setP] = useState("이름, 나이, 프로필 변경");
 
-  const puppet = usePuppet()??{};
-  const { puppetName, puppetModeLabel } = usePuppet();
-
+  // const puppet = usePuppet() ?? {};
+  // const { puppetName, puppetModeLabel } = usePuppet();
 
   useEffect(() => {
     switch (type) {
       case 1:
         setSrc(profileImg);
-        setH1('내 정보 수정');
-        setP('이름, 나이, 프로필 변경');
+        setH1("내 정보 수정");
+        setP("이름, 나이, 프로필 변경");
         break;
       case 2:
         setSrc(editNameImg);
-        setH1('퍼펫 이름 바꾸기');
-        setP(puppetName? puppetName : '토리');
+        setH1("퍼펫 이름 바꾸기");
+        setP(value || "토리");
         break;
       case 3:
         setSrc(modeImg);
-        setH1('대화 모드 변경');
-        setP(puppetModeLabel? puppetModeLabel : '활기찬');
+        setH1("대화 모드 변경");
+        setP(MODE_LABEL[value] || "활기찬");
         break;
     }
-  }, [type, puppetName, puppetModeLabel]);
+  }, [type, value]);
 
   return (
     <div className={styles.mypageOptionWrapper} onClick={onClick}>
@@ -43,9 +49,7 @@ export default function MyPageOption({ type, onClick }) {
         <h1>{h1}</h1>
         <p>{p}</p>
       </div>
-      <img src={chevron}/>
+      <img src={chevron} />
     </div>
   );
 }
-
-
