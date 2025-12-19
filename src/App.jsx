@@ -5,8 +5,9 @@ import Chat from "./pages/Chat/Chat.jsx";
 import "./App.css";
 import "./index.css";
 import MyPage from "./pages/Home/MyPage";
-import FairytalesPage from "./pages/Home/FairytalesPage";
-import StoragePage from "./pages/Home/StoragePage";
+import CreateFairytale from "./pages/Fairytales/CreateFairytale.jsx";
+import StoragePage from "./pages/Fairytales/StoragePage.jsx";
+import FairytaleDetail from "./pages/Fairytales/FairytaleDetail.jsx";
 
 function App() {
   return (
