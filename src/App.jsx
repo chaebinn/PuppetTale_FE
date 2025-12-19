@@ -5,8 +5,9 @@ import Chat from "./pages/Chat/Chat.jsx";
 import "./App.css";
 import "./index.css";
 import MyPage from "./pages/Home/MyPage";
-import FairytalesPage from "./pages/Home/FairytalesPage";
-import StoragePage from "./pages/Home/StoragePage";
+import CreateFairytale from "./pages/Fairytales/CreateFairytale.jsx";
+import StoragePage from "./pages/Fairytales/StoragePage.jsx";
+import FairytaleDetail from "./pages/Fairytales/FairytaleDetail.jsx";
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
       <Route path="/" element={<Chat />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/mypage" element={<MyPage />} />
-      <Route path="/fairytales" element={<FairytalesPage />} />
-      <Route path="/storage" element={<StoragePage />} />
+      <Route path="/fairytales" element={<CreateFairytale />} />
+      <Route path="/storage" element={<StoragePage/>}/>
+      <Route path="/fairytale/:id" element={<FairytaleDetail/>}/>
     </Routes>
   );
 }
