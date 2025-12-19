@@ -50,7 +50,6 @@ export default function ModeSelectModal({
 
       // 전역 상태 업데이트(옵션/채팅화면 등에서 즉시 반영)
       updatePuppetMode(selectedMode);
-
       // ✅ MyPage 최신값 재조회해서 화면에 반영
       onSuccess?.();
 
