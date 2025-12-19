@@ -11,11 +11,11 @@ import StoragePage from "./pages/Home/StoragePage";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/chat" element={<Chat />} /> 
+      <Route path="/" element={<Chat />} />
+      <Route path="/chat" element={<Chat />} />
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/fairytales" element={<FairytalesPage />} />
-      <Route path="/storage" element={<StoragePage/>}/>
+      <Route path="/storage" element={<StoragePage />} />
     </Routes>
   );
 }
