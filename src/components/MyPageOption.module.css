@@ -1,5 +1,5 @@
 .mypageOptionWrapper{width:100%; padding: 20px 24px 20px 24px; display: flex; gap:15px; align-items: center; justify-content: center; border-radius: 28px;
-border: var(--stroke-weight-2, 2px) solid var(--background-skyblue, #E5F4FF);
+border: var(--stroke-weight-2, 2px) solid var(--background-skyblue, #E5F4FF); cursor: pointer;
 background: var(--background-white, #FFF);}
 .myPageOptionTextBox{display: flex; flex-direction: column; gap:2px; justify-content: center; align-items: flex-start; min-width: 202px;}
 .myPageOptionTextBox h1{color: var(--text-black, #33363D); font-family: 'Pretendard'; font-size: 17px; font-style: normal;
