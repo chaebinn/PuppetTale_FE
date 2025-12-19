@@ -12,12 +12,12 @@ import FairytaleDetail from "./pages/Fairytales/FairytaleDetail.jsx";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/chat" element={<Chat />} /> 
+      <Route path="/" element={<Chat />} />
+      <Route path="/chat" element={<Chat />} />
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/fairytales" element={<CreateFairytale />} />
-      <Route path="/storage" element={<StoragePage/>}/>
-      <Route path="/fairytale/:id" element={<FairytaleDetail/>}/>
+      <Route path="/storage" element={<StoragePage />} />
+      <Route path="/fairytale/:id" element={<FairytaleDetail />} />
     </Routes>
   );
 }
