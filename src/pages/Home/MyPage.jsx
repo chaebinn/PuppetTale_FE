@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import apiClient from "../../api/client";
 //스타일과 img
 import styles from "./MyPage.module.css";
-import profileImg from "../../assets/puppet.svg";
+import profileImg from "../../assets/puppet2.svg";
 import profileEdit from "../../assets/profileEdit.svg";
 import CtaButton from "../../components/CtaButton";
 //컴포넌트

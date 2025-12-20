@@ -12,7 +12,7 @@ import FairytaleDetail from "./pages/Fairytales/FairytaleDetail.jsx";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Chat />} />
+      <Route path="/" element={<Home />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/fairytales" element={<CreateFairytale />} />

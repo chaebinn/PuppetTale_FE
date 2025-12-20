@@ -1,1 +1,154 @@
+.chatPage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 0;
+  box-sizing: border-box;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 80px;
+  height: 100%;
+}
+.characterSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
+.characterImage {
+  width: 280px;
+  height: 280px;
+  background: url("../../assets/mainpuppet.svg") no-repeat center center;
+  background-size: contain;
+}
+
+.greeting {
+  font-size: 22px;
+  font-weight: 700;
+  color: #4730dd;
+  text-align: center;
+  line-height: 120%;
+  margin: 0;
+  margin-bottom: 10px;
+}
+.musicSection {
+  width: calc(100% - 40px);
+  margin: 0 16px 0 16px;
+  padding: 16px;
+  border-radius: 36px;
+  border: 1px solid #fff;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-sizing: border-box;
+}
+
+.musicPrompt {
+  font-size: 18px;
+  font-weight: 600;
+  color: #00497b;
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.musicOptions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  gap: 12px;
+  margin: 0 auto;
+}
+
+.musicOptionButton {
+  display: flex;
+  height: 54px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 130%;
+  letter-spacing: -1px;
+  min-width: 120px;
+  padding: 0 var(--padding-7, 16px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-2, 2px);
+  flex-shrink: 0;
+  border-radius: 100px;
+  background: var(--icon-white, #fff);
+  /* button light */
+  box-shadow: 0 -1px 4px 0 #beddf2 inset,
+    -1px 2px 2px 0 rgba(255, 255, 255, 0.64) inset;
+}
+
+.musicOptionButton:hover {
+  border-color: #b5a2ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(181, 162, 255, 0.2);
+}
+
+.musicOptionButtonSelected {
+  background: linear-gradient(135deg, #b5a2ff 0%, #8b7fdb 100%);
+  border-color: #8b7fdb;
+  color: white;
+}
+
+.emoji {
+  font-size: 15px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+.musicName {
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.musicOptionButtonSelected .musicName {
+  color: white;
+}
+
+/* 입력 바 */
+.inputBar {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  bottom: 0;
+  width: var(--app-width); /* app-wrapper랑 똑같이 */
+  height: auto;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--element-white50, #ffffff80);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px); /* iOS 대응 */
+}
+
+.input {
+  flex: 1;
+  height: 40px;
+  border-radius: 999px;
+  border: none;
+  padding: 0 16px;
+  font-size: 14px;
+  outline: none;
+  background-color: #fff;
+}
+
+.sendButton {
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  width: 46px;
+  height: 46px;
+  padding: 14.254px 14px 11.746px 12px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  background-image: url("../../assets/sendBtn1.svg");
+}
