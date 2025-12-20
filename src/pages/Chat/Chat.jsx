@@ -3,6 +3,7 @@ import apiClient from "../../api/client";
 import styles from "./Chat.module.css";
 import Header from "../../components/Header";
 import SideMenu from "../../components/SideMenu";
+import { useLocation } from "react-router-dom";
 
 // 백엔드에 넘길 땐 false 로
 const USE_MOCK = false;
@@ -48,7 +49,8 @@ export default function Chat() {
   const [input, setInput] = useState("");
   const [musicOptions, setMusicOptions] = useState([]);
   const messageEndRef = useRef(null);
-
+  const location = useLocation();
+  const initialMusicId = location.state?.selectedMusicId || null;
   // 메시지 ID용 ref (키 중복 방지)
   const messageIdRef = useRef(2);
   const getNextMessageId = () => {
@@ -65,7 +67,23 @@ export default function Chat() {
       time: getCurrentTime(),
     },
   ]);
-
+    // 배경 이미지 매핑 추가
+  const backgroundMap = {
+    breeze: "https://puppettale-images.s3.ap-northeast-2.amazonaws.com/images/breeze.png",
+    amusement: "https://puppettale-images.s3.ap-northeast-2.amazonaws.com/images/amusement.png",
+    ocean: "https://puppettale-images.s3.ap-northeast-2.amazonaws.com/images/ocean.png",
+    none: "https://puppettale-images.s3.ap-northeast-2.amazonaws.com/images/none.png",
+  };
+  // 초기 음악 설정
+  useEffect(() => {
+    if (initialMusicId) {
+      setCurrentSoundId(initialMusicId);
+      setSelectedMusic(musicOptions.find((opt) => opt.id === initialMusicId));
+      setBackgroundImageUrl(
+        backgroundMap[initialMusicId] || backgroundMap.none
+      );
+    }
+  }, [initialMusicId, musicOptions]);
   // 음악 옵션 API 호출
   useEffect(() => {
     const fetchMusicOptions = async () => {

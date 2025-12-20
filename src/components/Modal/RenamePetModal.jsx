@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import BaseModal from "./BaseModal";
 import styles from "./RenamePetModal.module.css";
-import profileImg from "../../assets/puppet.svg";
+import profileImg from "../../assets/puppet2.svg";
 import { usePuppet } from "../../context/PuppetContext";
 import apiClient from "../../api/client";
 
