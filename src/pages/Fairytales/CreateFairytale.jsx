@@ -35,7 +35,7 @@ export default function CreateFairytale() {
         const userAge =
           Number(String(my?.age ?? "").replace(/[^0-9]/g, "")) || 0;
 
-        // 3) create 요청 바디 구성 (mypage 응답값 활용)
+        // 2) create 요청 바디 구성 (mypage 응답값 활용)
         const payload = {
           sessionId: "test_user_001",
           childId: 3,
@@ -44,7 +44,7 @@ export default function CreateFairytale() {
           puppetName: my?.puppetName ?? "토리",
         };
 
-        // 4) 동화 생성
+        // 3) 동화 생성
         const res = await createFairytale(payload);
         const data = res?.data ?? res;
 
@@ -194,12 +194,13 @@ export default function CreateFairytale() {
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
           >
-            <img
-              src={currentImageSrc}
-              className={styles.fairytalesImg}
-              alt="동화 이미지"
-            />
-
+            <div className={styles.imageBox}>
+              <img
+                src={currentImageSrc}
+                className={styles.fairytalesImg}
+                alt="동화 이미지"
+              />
+            </div>
             <p className={styles.fairytalesContent}>
               {currentText
                 ? currentText.split("\n").map((line, idx) => (
