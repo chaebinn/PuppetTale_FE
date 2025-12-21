@@ -210,18 +210,18 @@ export default function Chat() {
       ]);
     }
 
-    // 배경 이미지 업데이트
-    if (data.backgroundImageUrl) {
-      const url = data.backgroundImageUrl;
-      setBackgroundImageUrl(
-        url.startsWith("http") ? url : url.startsWith("/") ? url : `/${url}`
-      );
-    }
+    // // 배경 이미지 업데이트
+    // if (data.backgroundImageUrl) {
+    //   const url = data.backgroundImageUrl;
+    //   setBackgroundImageUrl(
+    //     url.startsWith("http") ? url : url.startsWith("/") ? url : `/${url}`
+    //   );
+    // }
 
-    // 사운드 아이디 업데이트
-    if (data.currentSoundId) {
-      setCurrentSoundId(data.currentSoundId);
-    }
+    // // 사운드 아이디 업데이트
+    // if (data.currentSoundId) {
+    //   setCurrentSoundId(data.currentSoundId);
+    // }
   };
 
   // axios + mock 스위치가 있는 API 호출 함수
@@ -234,6 +234,7 @@ export default function Chat() {
     try {
       const res = await apiClient.post("/api/chat/process", {
         sessionId: "test_user_001",
+        childId: 3,
         userMessage,
         ...(soundId !== undefined && { soundId }),
       });

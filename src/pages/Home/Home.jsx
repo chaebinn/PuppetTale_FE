@@ -4,6 +4,7 @@ import apiClient from "../../api/client";
 import styles from "./Home.module.css";
 import Header from "../../components/Header";
 import SideMenu from "../../components/SideMenu";
+import puppetGif from "../../assets/puppet.gif";
 
 const USE_MOCK = false;
 
@@ -81,7 +82,7 @@ export default function Home() {
               <br />
               오늘 하루는 어땠어?
             </h1>
-            <div className={styles.characterImage} />
+            <img src={puppetGif} className={styles.characterImage} />
           </div>
 
           {/* 음악 선택 영역 */}
