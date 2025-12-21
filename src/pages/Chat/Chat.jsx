@@ -51,6 +51,21 @@ export default function Chat() {
   const messageEndRef = useRef(null);
   const location = useLocation();
   const initialMusicId = location.state?.selectedMusicId || null;
+  const [puppetName, setPuppetName] = useState("");
+  // 퍼펫 이름 가져오기
+  useEffect(() => {
+    const fetchPuppetName = async () => {
+      try {
+        const res = await apiClient.get("/api/children/3/mypage");
+        setPuppetName(res.data.puppetName || "토리");
+      } catch (err) {
+        console.error("퍼펫 이름 불러오기 실패:", err);
+      }
+    };
+
+    fetchPuppetName();
+  }, []);
+
   // 메시지 ID용 ref (키 중복 방지)
   const messageIdRef = useRef(2);
   const getNextMessageId = () => {
@@ -67,11 +82,14 @@ export default function Chat() {
       time: getCurrentTime(),
     },
   ]);
-    // 배경 이미지 매핑 추가
+  // 배경 이미지 매핑 추가
   const backgroundMap = {
-    breeze: "https://puppettale-images.s3.ap-northeast-2.amazonaws.com/images/breeze.png",
-    amusement: "https://puppettale-images.s3.ap-northeast-2.amazonaws.com/images/amusement.png",
-    ocean: "https://puppettale-images.s3.ap-northeast-2.amazonaws.com/images/ocean.png",
+    breeze:
+      "https://puppettale-images.s3.ap-northeast-2.amazonaws.com/images/breeze.png",
+    amusement:
+      "https://puppettale-images.s3.ap-northeast-2.amazonaws.com/images/amusement.png",
+    ocean:
+      "https://puppettale-images.s3.ap-northeast-2.amazonaws.com/images/ocean.png",
     none: "https://puppettale-images.s3.ap-northeast-2.amazonaws.com/images/none.png",
   };
   // 초기 음악 설정
@@ -213,32 +231,6 @@ export default function Chat() {
     showMessage = true,
     loadingMessageId,
   }) => {
-    // // 1) mock 모드 (로컬에서 혼자 테스트할 때만 사용)
-    // if (USE_MOCK) {
-    //   console.log("[MOCK] callChatApi:", { userMessage, soundId });
-    //   const nowIso = new Date().toISOString();
-    //   const mockData = {
-    //     sessionId: "test_user_001",
-    //     aiResponse: `이건 목업 응답이야! 너가 보낸 말: "${userMessage}"`,
-    //     timestamp: nowIso,
-    //     currentSoundId:
-    //       soundId === undefined || soundId === null
-    //         ? currentSoundId || "breeze"
-    //         : soundId,
-    //     backgroundImageUrl:
-    //       soundId === "amusement"
-    //         ? "/images/amusement.png"
-    //         : soundId === "ocean"
-    //         ? "/images/ocean.png"
-    //         : soundId === "none"
-    //         ? "/images/none.png"
-    //         : "/images/breeze.png",
-    //   };
-    //   applyChatResponse(mockData, { showMessage });
-    //   return;
-    // }
-
-    // 2) 실제 백엔드 호출 모드
     try {
       const res = await apiClient.post("/api/chat/process", {
         sessionId: "test_user_001",
@@ -248,7 +240,7 @@ export default function Chat() {
 
       const data = res.data;
 
-      // ✅ 로딩 말풍선 제거
+      // 로딩 말풍선 제거
       if (loadingMessageId) {
         setMessages((prev) =>
           prev.filter((msg) => msg.id !== loadingMessageId)
@@ -334,7 +326,7 @@ export default function Chat() {
         <div className={styles.topSection}>
           <div className={styles.characterArea}>
             <div className={styles.avatar} />
-            <span className={styles.characterName}>토리</span>
+            <span className={styles.characterName}>{puppetName}</span>
           </div>
         </div>
 
