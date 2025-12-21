@@ -24,3 +24,6 @@ font-style: normal;font-weight: 500;line-height: 130%; letter-spacing: -1px; mar
 justify-content: space-between;}
 .fairytalesContent{color: var(--text-black, #33363D);text-align: center;font-family: 'Pretendard';font-size: 19px;
 font-style: normal;font-weight: 500;line-height: 150%; letter-spacing: -1px;}
+.buttonBox{
+    margin-bottom: 20px;
+}

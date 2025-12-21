@@ -1,26 +1,102 @@
 /* 전체 레이아웃 */
-.appWrapper{display:flex; flex-direction: column; align-items: center;justify-content: center;}
+.appWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
 /* 로딩중 박스 */
-.loadingBox {display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.loadingBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
 
 /* 프로필 이미지 */
-.profileImg {width: 140px;height: 140px;}
+.profileImg {
+  width: 140px;
+  height: 140px;
+}
 
 /* 로딩 애니메이션 */
-.loadingDots {display: flex; justify-content: center; align-items:center; gap: 6px; width: 48px; height: 42px;}
-.dot {width: 8px;height: 8px;flex-shrink: 0;background-color: var(--primary-10, #E5F4FF);
-border-radius: 50%;transition: background-color 0.3s ease; }
-.activeDot {background-color: var(--icon-primary, #0192F5);}
+.loadingDots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 48px;
+  height: 42px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  background-color: var(--primary-10, #e5f4ff);
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+.activeDot {
+  background-color: var(--icon-primary, #0192f5);
+}
 
 /* 텍스트 */
-h1{color: var(--text-black, #33363D);text-align: center;font-family: 'Pretendard';
-font-size: 22px;font-style: normal;font-weight: 700;line-height: 130%; letter-spacing: -1px; margin: 0px;padding: 2px 0 3px 0;}
-p{color: var(--text-gray, #6D7882); text-align: center;font-family: 'Pretendard';font-size: 15px;
-font-style: normal;font-weight: 500;line-height: 130%; letter-spacing: -1px; margin: 0px;}
+h1 {
+  color: var(--text-black, #33363d);
+  text-align: center;
+  font-family: "Pretendard";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%;
+  letter-spacing: -1px;
+  margin: 0px;
+  padding: 2px 0 3px 0;
+}
+p {
+  color: var(--text-gray, #6d7882);
+  text-align: center;
+  font-family: "Pretendard";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%;
+  letter-spacing: -1px;
+  margin: 0px;
+}
 
 /* 동화제작 완료 (로딩 false일 때) */
-.completePageWrapper{ width: var(--app-width);  height: var(--app-height);
- padding:57px 20px 34px 20px; display: flex; flex-direction: column; align-items: center;
-justify-content: space-between;}
-.fairytalesContent{color: var(--text-black, #33363D);text-align: center;font-family: 'Pretendard';font-size: 19px;
-font-style: normal;font-weight: 500;line-height: 150%; letter-spacing: -1px;}
+.completePageWrapper {
+  width: var(--app-width);
+  height: var(--app-height);
+  padding: 80px 20px 84px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; 
+  gap: 30px;               
+}
+.fairytalesContent {
+  color: var(--text-black, #33363d);
+  text-align: center;
+  font-family: "Pretendard";
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -1px;
+}
+.fairytalesImg {
+  width: 100%;
+  height: auto;
+  max-height: 45vh;
+  object-fit: contain;
+  margin-top: 20px;
+  border-radius: 20px;
+}
+.buttonBox{
+margin-top: -30px;
+margin-bottom: 20px;}
